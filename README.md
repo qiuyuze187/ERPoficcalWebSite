@@ -9,7 +9,7 @@ A Website can tell people something,and can change its text
 
 本网页使用HTML和PHP两种语言，HTML为宣传网页，PHP为管理网页（管理网页还不完善）
 
-如何部署？
+# 如何部署？
 
 如果你用WindowsServer，可以安装IIS（不需要管理网页），或PHP（需要管理网页）
 
@@ -21,7 +21,7 @@ apt install php
 
 当然，我开发时用WindowsServer环境测试，Linux暂未测试，所以如果部署到Linux上有问题，可以讨论，毕竟我比较习惯Windows。
 
-input.txt如何编辑：
+# input.txt如何编辑：
 
 如果是标题/需要强调的内容，用：
 
@@ -33,7 +33,7 @@ Title:
 
 图片资源会根据后缀（.jpg/.png/.gif）自动识别，无需标识图片
 
-notice.txt文件说明：
+# notice.txt文件说明：
 
 公告内容，可编辑
 
@@ -41,7 +41,7 @@ notice.txt文件说明：
 
 手机版的内容引用电脑版的资源文件
 
-.htaccess文件：
+# .htaccess文件：
 
 如果你部署在Apache服务器上，会自动调转到error.html，其他服务器可以参加他们的说明文档。
 
