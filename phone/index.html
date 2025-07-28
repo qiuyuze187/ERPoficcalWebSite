@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ERP软件主页</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="notice" class="notice-banner">
+  <span id="notice-text"></span>
+  <button type = "button" id="close-notice" class="notice-close">X</button>
+</div>
+  <header class="navbar">
+    <h5>公司 ERP 软件中心</h5>
+    <nav>
+      <a href="#intro">介绍</a>
+      <a href="#download">软件下载</a>
+      <a href="#contact">联系我们</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h2>欢迎下载 ERP 软件</h2>
+    <p>企业数字化，就从这款 ERP 开始。</p>
+    <a href="#download" class="btn">立即体验</a>
+  </section>
+  <!--  动态介绍区域 -->
+<section id="intro" class="features">
+  <div id="content"></div>
+</section>
+
+  <!-- 软件下载区域 -->
+  <section id="download" class="features">
+    <h2>软件下载</h2>
+    <p>想试用或购买吗？立即试用！</p>
+    <a class="btn" href=".././sdserp.zip" download>立即体验</a>
+    <a class="btn" href=".././软件说明.doc" download>下载使用教程</a>
+    <p style="margin-top: 10px; color: #c00;">
+      注意：MSIEXEC 默认会降权运行，请直接双击安装文件并无脑点 Next。
+    </p>
+  </section>
+
+  <!-- 联系我们 -->
+  <section id="contact" class="features">
+    <h2>联系我们</h2>
+    <p>微信号：newstart_20241031</p>
+    <a class="btn" href=".././feedback/index.php" class="download-button">如没有微信，点击这里一键反馈</a>
+  </section>
+  <footer class="footer">
+    <p>© 2025 Qiuyuze, All Right Reserved.</p>
+  </footer>
+<script>
+        // 定义TXT文件路径
+        const txtFilePath = '.././input.txt';
+
+        // 通过Fetch API读取TXT文件内容
+        fetch(txtFilePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch file: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(txtContent => {
+                const lines = txtContent.split('\n');
+                let title = '';
+                const contentDiv = document.getElementById('content');
+                let paragraphContainer = null;
+
+                // 分析TXT内容逐行处理
+                lines.forEach(line => {
+                    line = line.trim();
+                    if (line.startsWith('Title:')) {
+                        // 设置标题
+                        title = line.substring(6).trim();
+                        const titleElement = document.createElement('h2');
+                        titleElement.textContent = title;
+                        contentDiv.appendChild(titleElement);
+                    } else if (line !== '') {
+                        if (line.endsWith('.jpg') || line.endsWith('.png') || line.endsWith('.gif')) {
+                            // 如果是图片路径
+                            const imgElement = document.createElement('img');
+                            imgElement.src = ".././"+line;
+                            imgElement.alt = 'Image';
+                            imgElement.style.width = '200px'; 
+                            imgElement.style.margin = '10px'; 
+                            if (paragraphContainer) {
+                                paragraphContainer.appendChild(imgElement); // 将图片插入最后一个段落下面
+                            } else {
+                                contentDiv.appendChild(imgElement);
+                            }
+                        } else {
+                            // 如果是段落内容
+                            paragraphContainer = document.createElement('div');
+                            const paragraphElement = document.createElement('p');
+                            paragraphElement.textContent = line;
+                            paragraphContainer.appendChild(paragraphElement);
+                            contentDiv.appendChild(paragraphContainer);
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const contentDiv = document.getElementById('content');
+                contentDiv.textContent = 'Failed to load content.';
+            });
+</script>
+<script>
+fetch('.././notice.txt')
+  .then(response => response.text())
+  .then(text => {
+    const trimmed = text.trim();
+    if (trimmed.length > 0) {
+      document.getElementById('notice-text').innerText = trimmed;
+      document.getElementById('notice').style.display = 'block';
+    } else {
+      document.getElementById('notice').style.display = 'none';
+    }
+  })
+  .catch(error => {
+    console.error('公告加载失败:', error);
+    document.getElementById('notice').style.display = 'none';
+  });
+document.getElementById('close-notice').addEventListener('click', () => {
+  document.getElementById('notice').style.display = 'none';
+});
+</script>
+</body>
+</html>

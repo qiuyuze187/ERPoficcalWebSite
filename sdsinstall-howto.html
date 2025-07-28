@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="icon" type="image/png" href="./icon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用教程</title>
+    <style>
+  /* 侧边菜单容器 */
+  #sideMenu {
+    position: fixed;
+    top: 0;
+    left: -240px;
+    width: 240px;
+    height: 100%;
+    background-color: #2c3e50;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+    transition: left 0.35s ease;
+    z-index: 1000;
+  }
+  
+  /* 菜单打开状态 */
+  #sideMenu.open {
+    left: 0;
+  }
+  
+  /* 菜单列表 */
+  #sideMenu ul {
+    list-style: none;
+    padding: 60px 0 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  #sideMenu ul li {
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.4s forwards;
+    animation-delay: var(--delay);
+  }
+  
+  /* 列表项图标 */
+  #sideMenu ul li img {
+    width: 48px;
+    height: 48px;
+    display: block;
+    margin: 0 auto 8px;
+  }
+  
+  #sideMenu ul li span {
+    display: block;
+    color: #ecf0f1;
+    font-size: 14px;
+  }
+  
+  /* 动画关键帧：从左侧滑入并淡入 */
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* 菜单切换按钮 */
+  #menuToggle {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  /* 汉堡图标（三条横线） */
+  #menuToggle .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #2c3e50;
+    margin: 6px 0;
+    transition: background-color 0.3s;
+  }
+  
+  #menuToggle:hover .bar {
+    background-color: #2980b9;
+  }
+  /* 激活态样式 */
+  #sideMenu ul li.active {
+    background-color: #34495e;
+    border-left: 4px solid #e74c3c;
+    position: relative;
+  }
+
+  /* 激活态图例指示：左侧小圆点 */
+  #sideMenu ul li.active::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -16px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  /* 确保 li 为相对定位，方便定位 ::after */
+  #sideMenu ul li {
+    position: relative;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+  }
+
+  /* 鼠标停留时高亮、右移、手型 */
+  #sideMenu ul li:hover {
+    background-color: #3d566e;
+    transform: translateX(4px);
+    cursor: pointer;
+  }
+
+  /* 停留时在右下角显示小图标 */
+  #sideMenu ul li:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background-image: url('hover-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('sds.jpg'); /* 替换为您的背景图像路径 */
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(10px); /* 调整模糊度 */
+            z-index: -1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        /* 基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+       .active {
+            background-color: #333;
+            color: #FFFFFF; 
+            font-weight: bold; 
+            padding: 10px 20px;
+        }
+       .icp-footer {    /* 用于存放ICP备案信息的CSS */
+           position: fixed;
+           bottom: 0;
+           width: 100%;
+           text-align: center;
+           background-color: #f1f1f1; /* 可根据需要调整背景颜色 */
+           padding: 10px 0;
+           z-index: 1000; /* 确保在最前面 */
+        }
+        .download-button {
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .icp-link {  
+            color: inherit; 
+            text-decoration: none; 
+         }
+    @media (prefers-color-scheme: dark) {     /*检测系统深色模式*/
+            .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #121212;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+            .icp-footer {
+                background-color: #333333; /* 深色模式页脚背景颜色 */
+            }
+            h1 {
+                color: #ffffff; /* 深色模式标题颜色为白色 */
+            }
+        .icp-link { 
+            color: #ffffff; 
+            text-decoration: none; 
+         }
+     }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="container">
+        <h1>使用教程</h1>
+        <p>自己慢慢琢磨吧！</p>
+        <p>1、下载的文件解压</p>
+        <p>2、双击"sdserp.exe"，然后点"确定"，会自动安装</p>
+        <p>如果提示"无法打开WindowsInstaller程序包,..."的提示，请双击"mysql.msi"来完成安装</p>
+        <p>3、弹出的窗口再次单击"确定"</p>
+        <p>4、Yeah!恭喜你，完成了初次设置，以后自己再打开"sdserp.exe"来打开程序即可</p>
+        <a href=".\软件说明.doc" class="download-button">点击查看详细使用教程</a>
+    </div>
+    <div class="icp-footer">
+    <a href="http://47.103.192.39" class="icp-link">© 2025 Qiuyuze,All Right Reserved.</a>
+    </div>
+<script>
+  // 1. 构建侧边菜单 DOM
+  const sideMenu = document.createElement('nav');
+  sideMenu.id = 'sideMenu';
+  sideMenu.innerHTML = `
+    <ul>
+      <li style="--delay: 0.1s">
+        <img src="images/home.jpg" alt="首页"><span>首页</span>
+      </li>
+      <li style="--delay: 0.2s">
+        <img src="images/experience.jpg" alt="立即体验"><span>立即体验</span>
+      </li>
+      <li style="--delay: 0.3s">
+        <img src="images/tutorial.jpg" alt="使用教程"><span>使用教程</span>
+      </li>
+      <li style="--delay: 0.4s">
+        <img src="images/contact.jpg" alt="联系我们"><span>联系我们</span>
+      </li>
+    </ul>
+  `;
+  document.body.appendChild(sideMenu);
+
+  // 2. 构建菜单切换按钮
+  const toggleBtn = document.createElement('div');
+  toggleBtn.id = 'menuToggle';
+  toggleBtn.innerHTML = `
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  `;
+  document.body.appendChild(toggleBtn);
+
+  // 3. 点击切换侧边菜单
+  toggleBtn.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+  });
+
+  // 4. 点击菜单项后自动关闭（可选）
+  sideMenu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' || e.target.tagName === 'SPAN') {
+      sideMenu.classList.remove('open');
+    }
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. 菜单项对应链接
+    const items = sideMenu.querySelectorAll('li');
+    const urls = [
+      'index.html',
+      'download.html',
+      'sdsinstall-howto.html',
+      'contact.html'
+    ];
+
+    items.forEach((item, i) => {
+      const target = urls[i];
+      item.setAttribute('data-url', target);
+
+      // 点击跳转
+      item.addEventListener('click', () => {
+        window.location.href = target;
+      });
+
+      // 加载时高亮当前页面
+      if (window.location.pathname.endsWith(target)) {
+        item.classList.add('active');
+      }
+    });
+  });
+     </script>
+</body>
+</html>

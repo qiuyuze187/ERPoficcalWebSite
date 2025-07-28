@@ -1,0 +1,8 @@
+<!-- tutorial.svg (打开的书本) -->
+<svg width="48" height="48" viewBox="0 0 24 24"
+     xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ecf0f1" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2 3h7l3 2 3-2h7v18H2V3z"/>
+  <path d="M2 21V6h10v15"/>
+  <path d="M22 21V6h-10v15"/>
+</svg>
