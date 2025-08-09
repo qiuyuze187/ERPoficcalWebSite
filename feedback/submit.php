@@ -1,10 +1,31 @@
 <?php
-$message = trim($_POST['message']);
-if (!empty($message)) {
-    $entry = date('Y-m-d H:i:s') . " - " . $message . "\n";
-    file_put_contents('feedback.txt', $entry, FILE_APPEND | LOCK_EX);
-    echo "<script>alert('反馈已提交');window.location.href='index.php';</script>";
-} else {
-    echo "<script>alert('请填写反馈内容');window.location.href='index.php';</script>";
+session_start();
+if (!isset($_SESSION['user'])) exit;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $content = trim($_POST['content']);
+    $id = uniqid();
+    $user = $_SESSION['user'];
+    $timestamp = date('Y-m-d H:i:s');
+    $line = "{$id}|{$user}|{$content}|{$timestamp}|0\n";
+    file_put_contents('feedback.txt', $line, FILE_APPEND);
+    header('Location: dashboard.php');
+    exit;
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>提交反馈</title>
+    <?php include 'style.php'; ?>
+</head>
+<body>
+<div class="container">
+    <h2>提交反馈</h2>
+    <form method="post">
+        <textarea name="content" placeholder="请输入反馈内容" required></textarea><br>
+        <button type="submit">提交</button>
+    </form>
+</div>
+</body>
+</html>
